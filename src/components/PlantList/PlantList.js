@@ -8,13 +8,13 @@ function PlantList() {
 
   useEffect(() => {
     console.log('component did mount');
-    getPlants(); // Renamed from getFruit to getPlants for clarity
+    getPlants(); 
   }, []);
 
   const removeItem = (plant) => {
     dispatch({
       type: "DELETE_PLANT",
-      payload: plant.id, // Ensure this is the correct property
+      payload: plant.id, 
     });
   };
 
