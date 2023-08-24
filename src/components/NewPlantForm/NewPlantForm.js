@@ -38,13 +38,13 @@ const NewPlantForm = () => {
     <div>
       <h3>Plant form</h3>
       <form onSubmit={addNewPlant}>
-        <input type='text' value={name} onChange={e => setName(e.target.value)} />
-        <input type='text' value={kingdom} onChange={e => setKingdom(e.target.value)} />
-        <input type='text' value={clade} onChange={e => setClade(e.target.value)} />
-        <input type='text' value={order} onChange={e => setOrder(e.target.value)} />
-        <input type='text' value={family} onChange={e => setFamily(e.target.value)} />
-        <input type='text' value={subfamily} onChange={e => setSubfamily(e.target.value)} />
-        <input type='text' value={genus} onChange={e => setGenus(e.target.value)} />
+        <input type='text' value={name} onChange={event  => setName(event.target.value)} />
+        <input type='text' value={kingdom} onChange={event => setKingdom(event.target.value)} />
+        <input type='text' value={clade} onChange={event => setClade(event.target.value)} />
+        <input type='text' value={order} onChange={event => setOrder(event.target.value)} />
+        <input type='text' value={family} onChange={event => setFamily(event.target.value)} />
+        <input type='text' value={subfamily} onChange={event => setSubfamily(event.target.value)} />
+        <input type='text' value={genus} onChange={event => setGenus(event.target.value)} />
 
         <input type='submit' value='Add New Plant' />
       </form>
