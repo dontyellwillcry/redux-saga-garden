@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /* Routes */
-app.use('/api/plant', plantRouter);
+app.use('/plant', plantRouter);
 
 // Serve static files
 app.use(express.static('build'));

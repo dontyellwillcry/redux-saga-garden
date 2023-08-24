@@ -1,23 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 
-
 function PlantList() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const plantList = useSelector(store => store.plantList);
+  
 
-    const reduxState = useSelector(store => store);
+  useEffect(() => {
+    console.log('component did mount');
+    getPlants(); // Renamed from getFruit to getPlants for clarity
+  }, []);
 
-    useEffect(() => {
-        console.log('component did mount');
-        // dispatch an action to request the plantList from the API
-    }, []); 
-
-    return (
-        <div>
-            <h3>This is the plant list</h3>
-            <pre>{JSON.stringify(reduxState)}</pre>
-        </div>
-    );
+  const getPlants = () => {
+    dispatch({ type: "FETCH_PLANTS" });
+  };
+  console.log(plantList)
+  return (
+    
+    <ul>
+    {plantList.map((plant) => (
+      <li key={plant.id}>{plant.name}</li>
+    ))}
+  </ul>
+  );
 }
 
 export default PlantList;
