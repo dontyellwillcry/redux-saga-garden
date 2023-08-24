@@ -11,6 +11,14 @@ function PlantList() {
     getPlants(); // Renamed from getFruit to getPlants for clarity
   }, []);
 
+  const removeItem = (plant) => {
+    dispatch({
+      type: "DELETE_PLANT",
+      payload: plant.id, // Ensure this is the correct property
+    });
+  };
+
+
   const getPlants = () => {
     dispatch({ type: "FETCH_PLANTS" });
   };
@@ -18,10 +26,13 @@ function PlantList() {
   return (
     
     <ul>
-    {plantList.map((plant) => (
-      <li key={plant.id}>{plant.name}</li>
-    ))}
-  </ul>
+      {plantList.map((plant) => (
+        <li key={plant.id}>
+          {plant.name}
+          <button onClick={() => removeItem(plant)}>DELETE</button>
+        </li>
+      ))}
+    </ul>
   );
 }
 

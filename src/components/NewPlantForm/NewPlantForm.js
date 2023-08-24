@@ -1,35 +1,55 @@
-import React, {useState}from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 const NewPlantForm = () => {
-    const dispatch = useDispatch();
-    
-    //Initial state is an OBJECT, with keys id and name
-    let [newPlant, setPlant] = useState("");
+  const dispatch = useDispatch();
 
-    const handleNameChange = (event) => {
-        console.log('event happened');
-        //Similar to in redux -- we dont want to get rid of the id field when we update name
-        setPlant(event.target.value)
-    }
+  // Individual state values for each form field
+  const [name, setName] = useState('');
+  const [kingdom, setKingdom] = useState('');
+  const [clade, setClade] = useState('');
+  const [order, setOrder] = useState('');
+  const [family, setFamily] = useState('');
+  const [subfamily, setSubfamily] = useState('');
+  const [genus, setGenus] = useState('');
 
-    const addNewPlant = event => {
-        event.preventDefault();
-        dispatch({ type: 'FETCH_PLANTS', payload: newPlant });
-        //updates the next plant to have a new id
-        
-    }
-    return (
-        <div>
-            <h3>This is the form</h3>
-            <pre>{JSON.stringify(newPlant)}</pre>
-            <form onSubmit={addNewPlant}>
-                <input type='text' value={newPlant.name} onChange={handleNameChange} />
-                <input type='submit' value='Add New Plant' />
-            </form>
-        </div>
-    );
-}
+  const addNewPlant = event => {
+    event.preventDefault();
+    const newPlant = {
+      name,
+      kingdom,
+      clade,
+      order,
+      family,
+      subfamily,
+      genus
+    };
+    dispatch({ type: 'ADD_PLANT', payload: newPlant });
+    setName('')
+    setKingdom('')
+    setClade('')
+    setOrder('')
+    setFamily('')
+    setSubfamily('')
+    setGenus('')
+  };
 
+  return (
+    <div>
+      <h3>Plant form</h3>
+      <form onSubmit={addNewPlant}>
+        <input type='text' value={name} onChange={e => setName(e.target.value)} />
+        <input type='text' value={kingdom} onChange={e => setKingdom(e.target.value)} />
+        <input type='text' value={clade} onChange={e => setClade(e.target.value)} />
+        <input type='text' value={order} onChange={e => setOrder(e.target.value)} />
+        <input type='text' value={family} onChange={e => setFamily(e.target.value)} />
+        <input type='text' value={subfamily} onChange={e => setSubfamily(e.target.value)} />
+        <input type='text' value={genus} onChange={e => setGenus(e.target.value)} />
+
+        <input type='submit' value='Add New Plant' />
+      </form>
+    </div>
+  );
+};
 
 export default NewPlantForm;

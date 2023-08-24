@@ -19,7 +19,7 @@ const sagaMiddleware = createSagaMiddleware();
 function* rootSaga() {
   yield takeLatest("FETCH_PLANTS", fetchPlant);
   yield takeLatest("ADD_PLANT", updatePlants);
-  // yield takeLatest("DELETE_PLANTS", removePlant);
+  yield takeLatest("DELETE_PLANT", removePlant);
 }
 
 function* fetchPlant(action) {
@@ -39,7 +39,7 @@ function* updatePlants(action) {
     // Using 'yield' to wait for the POST request to complete
     yield axios.post("/plant", action.payload);
     // Dispatching an action to fetch the latest elements list
-    yield put({ type: "FETCH_BASKET" });
+    yield put({ type: "FETCH_PLANTS" });
   } catch (error) {
     console.log("error posting a basket", error);
   }
@@ -56,6 +56,15 @@ const plantList = (state = [], action) => {
       return state;
   }
 };
+
+function* removePlant(action) {
+  try {
+    yield axios.delete(`/plant/${action.payload}`);
+    yield put({ type: "FETCH_PLANTS" });
+  } catch (error) {
+    console.log("error posting a basket", error);
+  }
+}
 
 
 
